@@ -68,10 +68,10 @@ var vm = function () {
                 $("#Weight").hide();
             }
             if (data.Sex == "M") {
-                $("#Sex").html('Male <i class="fa-regular fa-mars" aria-hidden="true"></i>');
+                $("#Sex").html('Male <i class="fa fa-mars" aria-hidden="true"></i>');
             }
             if (data.Sex == "F") {
-                $("#Sex").html('Female <i class="fa-regular fa-venus" aria-hidden="true"></i>');
+                $("#Sex").html('Female <i class="fa fa-venus" aria-hidden="true"></i>');
             }
         });
     };
