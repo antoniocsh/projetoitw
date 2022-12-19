@@ -24,6 +24,7 @@ var vm = function () {
     self.Modalities = ko.observableArray([]);
     self.Competitions = ko.observableArray([]);
     self.Medals = ko.observableArray([]);
+    self.Genero = ko.observable('');
 
     //--- Page Events
     self.activate = function (id) {
@@ -74,10 +75,12 @@ var vm = function () {
                 $("#Weight").hide();
             }
             if (data.Sex == "M") {
-                $("#Sex").html('Male <i class="fa-regular fa-mars" aria-hidden="true"></i>');
+                $("#Sex").html('Male <i class="fa fa-mars" aria-hidden="true"></i>');
+                $("#Genero").html('<i class="fa fa-mars fa-2x" aria-hidden="true"></i>');
             }
             if (data.Sex == "F") {
-                $("#Sex").html('Female <i class="fa-regular fa-venus" aria-hidden="true"></i>'); 
+                $("#Sex").html('Female <i class="fa fa-venus" aria-hidden="true"></i>');
+                $("#Genero").html('<i class="fa fa-venus" aria-hidden="true"></i>');
             }
             if (data.Games.length == 0) {
                 $("#Games").hide();
@@ -159,4 +162,7 @@ $(document).ready(function () {
 
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
+    $("#imagem").click(function () {
+        $('#modalFoto').modal('show'); 
+    });
 })
