@@ -13,6 +13,7 @@ var vm = function () {
     self.Photo = ko.observable('');
     self.Variants = ko.observable('');
     self.Url = ko.observable('');
+    self.Modalities =ko.observableArray([]);
 
     //--- Page Events
     self.activate = function (id) {
@@ -25,6 +26,7 @@ var vm = function () {
             self.Name(data.Name);
             self.Variants(data.Modalities);
             self.Photo(data.Photo);
+            self.Modalities(data.Modalities);
         });
     };
 

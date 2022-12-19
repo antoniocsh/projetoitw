@@ -32,11 +32,16 @@
     </nav>
     <!-- Work Area-->
     <div class="container">
-        <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text:Name()"></h2>
+        <div class="row py-2 border-bottom mb-3">
+            <div class="col-6"><h2 data-bind="text: Name() + ' [' + Id() + ']'"></h2>
+            </div>
+            <div class="col-3 float-start" id="Genero"></div>
+            <div class="col-3 float-end">   <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+            </div>
         </div>
+        
         <!-- ko if:Name().length > 0 -->
-        <div class="row border-bottom mx-0 my-1">
+        <!--- <div class="row border-bottom mx-0 my-1">
             <div class="col-2">Athlete Id</div><div class="col-10" data-bind="text: Id"></div>
         </div>
         <div class="row border-bottom mx-0  my-1">
@@ -44,7 +49,7 @@
         </div>
         <div class="row border-bottom mx-0  my-1">
             <div class="col-2">Sex</div><div class="col-10" id="Sex"></div>
-        </div>
+        </div> --->
         <div class="row border-bottom mx-0  my-1" id="BornDate">
             <div class="col-2">Date of Birth</div><div class="col-10" data-bind="text: BornDate"></div>
         </div>
@@ -65,22 +70,27 @@
         </div>
         <div class="row border-bottom mx-0  my-1" data-bind="visible: Photo() != '' && Photo() != null" id="Photo">
             <div class="col-2">Photo</div><div class="small col-10">
-                <img class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
+                <img class="img-thumbnail" data-bs-toggle="modal" id="imagem" data-bs-target="#modalFoto" data-bind="attr:{src: Photo}">
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
             </div>
         </div>
 
         <div class="border-bottom mx-0  my-1" id="Modalities">
-        <table style="width: 800px; margin-left: 10px;" >
+        <table style="width: 250px; margin-left: 10px;" >
             <tr>
                 <td>Modalities</td>
-                <td>Id</td>
                 <td>Nome</td>
+                <td></td>
+
             </tr>
             <tr data-bind="foreach: Modalities">
                 <td></td>
-                <td data-bind="text: Id"></td>
                 <td data-bind="text: Name"></td>
+                    <td>
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }">
+                            <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                        </a>
+                    </td>
         </table>
         </div>
 
@@ -88,19 +98,23 @@
         <table style="width: 800px; margin-left: 10px;" >
             <tr>
                 <td>Games</td>
-                <td>Id</td>
                 <td>Nome</td>
                 <td>Ano</td>
                 <td>Cidade</td>
                 <td>País</td>
+                <td></td>
             </tr>
             <tr data-bind="foreach: Games">
                 <td></td>
-                <td data-bind="text: Id"></td>
                 <td data-bind="text: Name"></td>
                 <td data-bind="text: Year"></td>
                 <td data-bind="text: CityName"></td>
                 <td data-bind="text: CountryName"></td>
+                <td>
+                    <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./gameDetails.html?id=' + Id }">
+                        <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                    </a>
+                </td>
         </table>
         </div>
 
@@ -108,19 +122,23 @@
             <table style="width: 800px; margin-left: 10px;" >
                 <tr>
                     <td>Competitions</td>
-                    <td>Id</td>
                     <td>Nome</td>
                     <td>Foto</td>
                     <td>Modalidade</td>
                     <td>Resultados</td>
+                    <td></td>
                 </tr>
                 <tr data-bind="foreach: Competitions">
                     <td></td>
-                    <td data-bind="text: Id"></td>
                     <td data-bind="text: Name"></td>
                     <td data-bind="text: Photo"></td>
                     <td data-bind="text: Modality"></td>
                     <td data-bind="text: Results"></td>
+                    <td>
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
+                            <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                        </a>
+                    </td>
             </table>
             </div>
 
@@ -156,14 +174,27 @@
   </button>-->
 
 
+
         <div class="row border-bottom mx-0  my-1" id="OlympediaLink">
             <div class="col-2">Olympedia Link</div><div class="col-10"><a data-bind="attr: {href: OlympediaLink}"><p data-bind="text: OlympediaLink"></p></a></div>
         </div>
         <!-- /ko -->
-        <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-    </div>
+     
 
-  
+  <!-- Modal DA FOTO Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard ---->
+<div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="modalFoto" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 900px;">
+            <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img data-bind="attr: {src: Photo}" style="width: 100%; height: 100%;"/>
+            </div>
+        </div>
+    </div>
+</div>
 
 
       
