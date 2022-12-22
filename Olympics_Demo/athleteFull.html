@@ -49,7 +49,7 @@
         </div>
         <div class="row border-bottom mx-0  my-1">
             <div class="col-2">Sex</div><div class="col-10" id="Sex"></div>
-        </div> --->
+        </div> 
         <div class="row border-bottom mx-0  my-1" id="BornDate">
             <div class="col-2">Date of Birth</div><div class="col-10" data-bind="text: BornDate"></div>
         </div>
@@ -67,83 +67,97 @@
         </div>
         <div class="row border-bottom mx-0  my-1" id="Weight">
             <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight"></div>
-        </div>
-        <div class="row border-bottom mx-0  my-1" data-bind="visible: Photo() != '' && Photo() != null" id="Photo">
+        </div>--->
+
+        
+    <ul class="nav nav-tabs border-bottom" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Modalities</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Games</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Competitions</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><div class="mx-0  my-1" id="Modalities">
+          <table class="table table-stripped"  >
+              <tr>
+                  <td>Nome</td>
+                  <td></td>
+      
+              </tr>
+              <tr data-bind="foreach: Modalities">
+                  <td data-bind="text: Name"></td>
+                      <td>
+                          <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }">
+                              <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                          </a>
+                      </td>
+          </table>
+          </div></div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="mx-0  my-1" id="Games">
+          <table class="table table-stripped"  >
+              <tr>
+                  <td>Nome</td>
+                  <td>Ano</td>
+                  <td>Cidade</td>
+                  <td>País</td>
+                  <td></td>
+              </tr>
+              <tr data-bind="foreach: Games">
+                  <td data-bind="text: Name"></td>
+                  <td data-bind="text: Year"></td>
+                  <td data-bind="text: CityName"></td>
+                  <td data-bind="text: CountryName"></td>
+                  <td>
+                      <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./gameDetails.html?id=' + Id }">
+                          <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                      </a>
+                  </td>
+          </table>
+          </div>
+      </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">       <div class="mx-0  my-1" id="Competitions">
+          <table class="table table-stripped"  >
+              <tr>
+                  <td>Nome</td>
+                <!--- <td>Foto</td> --> 
+                  <td>Modalidade</td>
+                  <td>Resultados</td>
+                  <td></td>
+              </tr>
+              <tr data-bind="foreach: Competitions">
+                  <td data-bind="text: Name"></td>
+                  <!---- <td data-bind="text: Photo"></td> ---->
+                  <td data-bind="text: Modality"></td>
+                  <td data-bind="text: Results"></td>
+                  <td>
+                      <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
+                          <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                      </a>
+                  </td>
+          </table>
+          </div>
+      </div>
+      </div>
+      
+        <div class="row mx-0  my-1" data-bind="visible: Photo() != '' && Photo() != null" id="Photo">
             <div class="col-2">Photo</div><div class="small col-10">
-                <img class="img-thumbnail" data-bs-toggle="modal" id="imagem" data-bs-target="#modalFoto" data-bind="attr:{src: Photo}">
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
+                <img style="cursor: pointer" class="img-thumbnail" data-bs-toggle="modal" id="imagem" data-bs-target="#modalFoto" data-bind="attr:{src: Photo}">
             </div>
         </div>
 
-        <div class="border-bottom mx-0  my-1" id="Modalities">
-        <table style="width: 250px; margin-left: 10px;" >
-            <tr>
-                <td>Modalities</td>
-                <td>Nome</td>
-                <td></td>
-
-            </tr>
-            <tr data-bind="foreach: Modalities">
-                <td></td>
-                <td data-bind="text: Name"></td>
-                    <td>
-                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }">
-                            <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                        </a>
-                    </td>
-        </table>
+        <div class="row mx-0  my-1" id="OlympediaLink">
+            <div class="col-2">Olympedia Link</div><div class="col-10"><a data-bind="attr: {href: OlympediaLink}"><p data-bind="text: OlympediaLink"></p></a></div>
         </div>
 
-        <div class="border-bottom mx-0  my-1" id="Games">
-        <table style="width: 800px; margin-left: 10px;" >
-            <tr>
-                <td>Games</td>
-                <td>Nome</td>
-                <td>Ano</td>
-                <td>Cidade</td>
-                <td>País</td>
-                <td></td>
-            </tr>
-            <tr data-bind="foreach: Games">
-                <td></td>
-                <td data-bind="text: Name"></td>
-                <td data-bind="text: Year"></td>
-                <td data-bind="text: CityName"></td>
-                <td data-bind="text: CountryName"></td>
-                <td>
-                    <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./gameDetails.html?id=' + Id }">
-                        <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                    </a>
-                </td>
-        </table>
-        </div>
-
-        <div class="border-bottom mx-0  my-1" id="Competitions">
-            <table style="width: 800px; margin-left: 10px;" >
-                <tr>
-                    <td>Competitions</td>
-                    <td>Nome</td>
-                    <td>Foto</td>
-                    <td>Modalidade</td>
-                    <td>Resultados</td>
-                    <td></td>
-                </tr>
-                <tr data-bind="foreach: Competitions">
-                    <td></td>
-                    <td data-bind="text: Name"></td>
-                    <td data-bind="text: Photo"></td>
-                    <td data-bind="text: Modality"></td>
-                    <td data-bind="text: Results"></td>
-                    <td>
-                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
-                            <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                        </a>
-                    </td>
-            </table>
-            </div>
-
-            <div class="border-bottom mx-0  my-1" id="Medals">
-                <table style="width: 800px; margin-left: 10px;" >
+ 
+            <div class="mx-0  my-1" id="Medals">
+                <table class="table table-stripped"  >
                     <tr>
                         <td>Medalhas</td>
                         <td>Id</td>
@@ -157,6 +171,8 @@
                         <td data-bind="text: Counter"></td>
                 </table>
                 </div>
+
+    
 
   <!-- Modal DOS GAMES trigger button 
     <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalGames">
@@ -175,26 +191,26 @@
 
 
 
-        <div class="row border-bottom mx-0  my-1" id="OlympediaLink">
-            <div class="col-2">Olympedia Link</div><div class="col-10"><a data-bind="attr: {href: OlympediaLink}"><p data-bind="text: OlympediaLink"></p></a></div>
-        </div>
         <!-- /ko -->
      
-
+</div>
   <!-- Modal DA FOTO Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard ---->
 <div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="modalFoto" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 900px;">
             <div class="modal-header">
+                    <h3 data-bind="text: Name" class="w-100 modal-title text-center"></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <img data-bind="attr: {src: Photo}" style="width: 100%; height: 100%;"/>
+                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
             </div>
         </div>
     </div>
 </div>
+
 
 
       
