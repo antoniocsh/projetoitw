@@ -12,7 +12,7 @@ var vm = function () {
     self.Name = ko.observable('');
     self.ModalityId = ko.observable('');
     self.Modality = ko.observable('');
-    self.Participant = ko.observable([]);
+    self.Participant = ko.observableArray([]);
     self.Photo = ko.observable('');
     self.Url = ko.observable('');
 
