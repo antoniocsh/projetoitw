@@ -144,7 +144,7 @@ var vm = function () {
             window.location.href = "athleteDetails.html?id=" + athleteID;
             } else {
             // if the ID is not valid, show an error message
-            $('#error-message').text("Invalid athlete ID");
+            $('#error-message').html('<span class="text-danger"><i class="fa fa-warning" aria-hidden="true"></i> Invalid athlete ID</span>'); 
             }
           });
           // a function to check the validity of the athlete ID
@@ -153,7 +153,7 @@ var vm = function () {
             var pageExists = false;
             // make an HTTP GET request to the API URL
             $.ajax({
-                url: "http://192.168.160.58/Olympics/api/Athletes/FullDetails?id=" + id,
+                url: "http://192.168.160.58/Olympics/api/Athletes/" + id,
                 type: "GET",
                 async: false, // use the async option to make the request synchronous
                 success: function() {
@@ -164,6 +164,7 @@ var vm = function () {
             // return the result of the API page existence check
             return pageExists;
             }
+
     });
 
     //--- start ....

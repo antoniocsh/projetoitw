@@ -58,10 +58,10 @@
             <div class="col-2">Place of Death</div><div class="col-10" data-bind="text: DiedPlace"></div>
         </div>
         <div class="row border-bottom mx-0  my-1" id="Height">
-            <div class="col-2">Height</div><div class="col-10" data-bind="text: Height"></div>
+            <div class="col-2">Height</div><div class="col-10" data-bind="text: Height() + ' cm' "></div>
         </div>
         <div class="row border-bottom mx-0  my-1" id="Weight">
-            <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight"></div>
+            <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight() + ' kg' "></div>
         </div>
         <div class="row border-bottom mx-0  my-1" data-bind="visible: Photo() != '' && Photo() != null" id="Photo">
             <div class="col-2">Photo</div><div class="small col-10">

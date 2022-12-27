@@ -76,11 +76,11 @@ var vm = function () {
             }
             if (data.Sex == "M") {
                 $("#Sex").html('Male <i class="fa fa-mars" aria-hidden="true"></i>');
-                $("#Genero").html('<i class="fa fa-mars fa-2x" aria-hidden="true"></i>');
+                self.Genero('<i class="fa fa-mars" aria-hidden="true"></i>');
             }
             if (data.Sex == "F") {
                 $("#Sex").html('Female <i class="fa fa-venus" aria-hidden="true"></i>');
-                $("#Genero").html('<i class="fa fa-venus" aria-hidden="true"></i>');
+                self.Genero('<i class="fa fa-venus" aria-hidden="true"></i>');
             }
             if (data.Games.length == 0) {
                 $("#Games").hide();
