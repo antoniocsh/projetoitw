@@ -110,6 +110,62 @@ var vm = function () {
         }
     };
 
+    $().ready(function () {
+        $("#tagsAthletes").autocomplete({
+            minlenght: 3,
+            source: function (request, response) {
+                $.ajax({
+                    url: "http://192.168.160.58/Olympics/api/Athletes/SearchByName?q=" + request.term,
+                    dataType: "json"
+                }).done(function ( APIdata) {
+                    data = APIdata;
+                    let athletes = data.map(function (athlete) {
+                        return {
+                            label: athlete.Name,
+                            value: athlete.Name,
+                            name: athlete.Id
+                        }
+                             });
+                    response(athletes.slice(0, 10));
+                });
+            },
+            select: function (event, ui) {
+                window.location.href = "athleteDetails.html?id=" + ui.item.name;
+            },
+        }).find("li").css({ width: "150px" });
+
+        $('#searchform').submit(function(event) {
+            // prevent the default behavior (submitting the form)
+            event.preventDefault();
+            // get the value of the search bar
+            let athleteID = $('#tagsAthletes').val();
+            // redirect to the athlete's page using the athlete ID
+            if (isValidID(athleteID)) {
+            window.location.href = "athleteDetails.html?id=" + athleteID;
+            } else {
+            // if the ID is not valid, show an error message
+            $('#error-message').text("Invalid athlete ID");
+            }
+          });
+          // a function to check the validity of the athlete ID
+          function isValidID(id) {
+            // a variable to store the result of the API page existence check
+            var pageExists = false;
+            // make an HTTP GET request to the API URL
+            $.ajax({
+                url: "http://192.168.160.58/Olympics/api/Athletes/FullDetails?id=" + id,
+                type: "GET",
+                async: false, // use the async option to make the request synchronous
+                success: function() {
+                // if the request is successful, the page exists
+                pageExists = true;
+          }
+            });
+            // return the result of the API page existence check
+            return pageExists;
+            }
+    });
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
