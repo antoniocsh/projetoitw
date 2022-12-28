@@ -65,6 +65,12 @@
             </div>
         </div>
             <!-- /ko -->
+            <form class="form-inline py-2 my-lg-0 " id="searchform">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search and Select Someone"
+                    spellcheck="false" id="tagsAthletes" aria-label="Search" />         
+            </form>
+            <div id="error-message" class="ps-2 mb-2"></div>
+            
         <div class="row" data-bind="foreach: records">
             <div class="col-3" style="margin-bottom: 20px;">
                 <div class="card  h-100"  >
@@ -112,6 +118,8 @@
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/jquery-ui/dist/jquery-ui.js"></script>
+    <link rel="stylesheet" href="..\lib\jquery-ui\dist\themes\base\jquery-ui.css">
     <script src="countries.js"></script>
 </body>
 </html>

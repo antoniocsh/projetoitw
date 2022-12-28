@@ -76,14 +76,17 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Sexo</th>
+                <!-- <th></th> -->
                 <th scope="col" class="text-right"></th>
             </tr>
         </thead>
         <tbody data-bind="foreach: records">
             <tr>
                 <td class="align-middle" data-bind="text:Id"></td>
-                <td class="align-middle" data-bind="text:Name"></td>
+                <td class="align-middle" data-bind="html: Name + ' ' + $root.formatPosition(BestPosition)"></td>
                 <td class="align-middle" data-bind="text:Sex"></td>
+                <!-- <td class="align-middle" data-bind="html: $root.formatPosition(BestPosition)"></td> - TENTAR METER AQUI A MEDALHA MAS TA IMPOSSIVEL -->
+
                 <td class="text-end">
                     <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
                         <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
@@ -127,5 +130,6 @@
     <script src="../lib/jquery-ui/dist/jquery-ui.js"></script>
     <link rel="stylesheet" href="..\lib\jquery-ui\dist\themes\base\jquery-ui.css">
     <script src="athletes.js"></script>
+
 </body>
 </html>

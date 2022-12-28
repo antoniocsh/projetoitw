@@ -14,6 +14,7 @@ var vm = function () {
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
+    
     self.previousPage = ko.computed(function () {
         return self.currentPage() * 1 - 1;
     }, self);
@@ -41,6 +42,7 @@ var vm = function () {
         for (var i = 1; i <= size; i++)
             list.push(i + step);
         return list;
+        
     };
 
     //--- Page Events
@@ -58,8 +60,22 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+            
+
         });
     };
+
+    self.formatPosition = function(med) {
+        if(med == "1")
+          return '<span style="font-size: 17px"> &#129351; </span>';
+        if(med == "2")
+          return '<span style="font-size: 17px"> &#129352; </span>';
+        if(med == "3")
+          return '<span style="font-size: 17px"> &#129353; </span>';
+        if(med == "4")
+          return "";
+    };
+
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
@@ -112,7 +128,7 @@ var vm = function () {
 
     $().ready(function () {
         $("#tagsAthletes").autocomplete({
-            minlenght: 3,
+            minLength: 3,
             source: function (request, response) {
                 $.ajax({
                     url: "http://192.168.160.58/Olympics/api/Athletes/SearchByName?q=" + request.term,
@@ -144,7 +160,7 @@ var vm = function () {
             window.location.href = "athleteDetails.html?id=" + athleteID;
             } else {
             // if the ID is not valid, show an error message
-            $('#error-message').html('<span class="text-danger"><i class="fa fa-warning" aria-hidden="true"></i> Invalid athlete ID</span>'); 
+            $('#error-message').html('<span class="text-danger"><i class="fa fa-warning" aria-hidden="true"></i> Invalid Athlete ID</span>'); 
             }
           });
           // a function to check the validity of the athlete ID
@@ -164,8 +180,8 @@ var vm = function () {
             // return the result of the API page existence check
             return pageExists;
             }
-
     });
+    
 
     //--- start ....
     showLoading();
@@ -187,3 +203,4 @@ $(document).ready(function () {
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
 })
+
