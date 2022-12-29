@@ -43,6 +43,14 @@ var vm = function () {
         return list;
     };
 
+    self.metaData = {
+        athletes: [],
+        competitions: [],
+        countries: [],
+        games: [],
+        modalities: [],
+}
+
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getGames...');
@@ -118,6 +126,47 @@ var vm = function () {
             }
     });
     
+
+    self.updateLocalStorage = (key, data) => {
+        localStorage.setItem(key, JSON.stringify(data))
+        console.log(data)
+    }
+
+    self.checkButtons = function(id) {
+        for (let k in self.metaData) {
+            if (self.metaData[k].includes(String(id))) {
+                document.getElementById(k + '-button').classList.add("active")
+            }
+        }
+    }
+
+    self.updateMetaData = function(id, name) {
+        //Adicionar
+        if (self.metaData[name].includes(String(id)) == false) {
+            self.metaData[name].push(String(id))
+            self.updateLocalStorage(name, self.metaData[name])
+            $('#coracao').removeClass('fa fa-heart-o')
+            $('#coracao').addClass('fa fa-heart')
+        } else {
+            //Remover
+            self.metaData[name].splice(self.metaData[name].indexOf(String(id)), 1)
+            self.updateLocalStorage(name, self.metaData[name])
+            $('#coracao').removeClass('fa fa-heart')
+            $('#coracao').addClass('fa fa-heart-o')
+        }
+        self.updateheart(id, name)
+    }
+
+    self.updateheart = function(id, name){
+        console.log(self.metaData[name].includes(String(id)))
+        if (self.metaData[name].includes(String(id)) == true) {
+            $('.'+id).removeClass('fa fa-heart-o')
+            $('.'+id).addClass('fa fa-heart')
+        } else {
+            $('.'+id).removeClass('fa fa-heart')
+            $('.'+id).addClass('fa fa-heart-o')
+    }}
+
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message

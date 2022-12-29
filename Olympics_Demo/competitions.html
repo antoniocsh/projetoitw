@@ -25,7 +25,8 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class=" fa fa-flag-o text-danger"></i> Countries</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
+                                        <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="favoritos.html"><i class="fa fa-heart-o text-danger"></i> Favoritos</a></li>
                 </ul>
             </div>
         </div>
@@ -75,12 +76,21 @@
                     <a  data-bind="attr: { href:'./competitionDetails.html?id=' + Id }" ><img style="cursor:pointer; padding: 4px;" class="card-img" data-bind="attr: {src: Photo}" width="250px"/></a>
                     <div class="card-body">
                         <h5 class="card-title" data-bind="text: Name"></h5>
-                        <p class="card-text"> <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
+                        <div class="card-text"> <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
                             <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
                         </a>
-                        <button class="btn btn-default btn-xs">
+                        <!-- <button class="btn btn-default btn-xs">
                             <i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Selecione para adicionar aos favoritos"></i>
-                        </button></p>
+                        </button> -->
+                        <button data-bind="click: $parent.updateMetaData.bind($data,Id,'competitions')" type="button" class="btn btn-default btn-sm" id="competitions-button" href="#">
+                            <i
+                              aria-hidden="true"
+                              data-bind="class: 'fa fa-heart-o text-danger ' + Id"
+                              title="Selecione para adicionar aos favoritos"
+                            ></i>
+                          </button>
+                    
+                        </div>
                     </div>
                 </div>
             </div>
