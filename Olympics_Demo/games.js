@@ -42,6 +42,9 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+    
+
+
 
     self.metaData = {
         athletes: [],
@@ -66,6 +69,9 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+            for (var i = 0; i <= self.records().length; i++){
+                self.updateheart((self.records()[i]).Id, 'games')
+            }
         });
     };
     $().ready(function () {
@@ -123,6 +129,8 @@ var vm = function () {
             return pageExists;
             }
     });
+
+    
     
     self.updateLocalStorage = (key, data) => {
         localStorage.setItem(key, JSON.stringify(data))
@@ -137,21 +145,21 @@ var vm = function () {
         }
     }
 
-    self.updateMetaData = function(id, name) {
+    self.updateMetaData = function(id, name1) {
         //Adicionar
-        if (self.metaData[name].includes(String(id)) == false) {
-            self.metaData[name].push(String(id))
-            self.updateLocalStorage(name, self.metaData[name])
+        if (self.metaData[name1].includes(String(id)) == false) {
+            self.metaData[name1].push(String(id))
+            self.updateLocalStorage(name1, self.metaData[name1])
             $('#coracao').removeClass('fa fa-heart-o')
             $('#coracao').addClass('fa fa-heart')
         } else {
             //Remover
-            self.metaData[name].splice(self.metaData[name].indexOf(String(id)), 1)
-            self.updateLocalStorage(name, self.metaData[name])
+            self.metaData[name1].splice(self.metaData[name1].indexOf(String(id)), 1)
+            self.updateLocalStorage(name1, self.metaData[name1])
             $('#coracao').removeClass('fa fa-heart')
             $('#coracao').addClass('fa fa-heart-o')
         }
-        self.updateheart(id, name)
+        self.updateheart(id, name1)
     }
 
     self.updateheart = function(id, name){
