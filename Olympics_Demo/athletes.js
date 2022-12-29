@@ -75,6 +75,12 @@ var vm = function () {
         if(med == "4")
           return "";
     };
+    self.formatSex = function(sexo) {
+        if(sexo == "M")
+          return '<i style="font-size:17px" class="fa fa-mars" aria-hidden="true"></i>';
+        if(sexo == "F")
+          return '<i style="font-size:17px" class="fa fa-venus" aria-hidden="true"></i>';
+    };
 
 
     //--- Internal functions
