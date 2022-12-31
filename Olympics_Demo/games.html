@@ -26,6 +26,7 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class=" fa fa-flag-o text-danger"></i> Countries</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a></li>
                                         <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
+<li class="nav-item"><a class="nav-link" aria-current="page" href="estatisticas.html"><i class="fa fa-bar-chart text-info"></i> Estatísticas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="favoritos.html"><i class="fa fa-heart-o text-danger"></i> Favoritos</a></li>
                 </ul>
             </div>
@@ -64,12 +65,26 @@
             </div>
         </div>
         <!-- /ko -->
-        <form class="form-inline py-2 my-lg-0 " id="searchform">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search and Select Someone"
-                spellcheck="false" id="tagsAthletes" aria-label="Search" />         
-        </form>
-        <div id="error-message" class="ps-2 mb-2"></div>
+        <div class="row">
+            <div class="col-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-filter"></i> Filter
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a id="summer" data-bind="attr:{href:'./games.html?season=1'}" class="dropdown-item" >Summer</a></li>
+                        <li><a id="winter" data-bind="attr:{href:'./games.html?season=2'}" class="dropdown-item" >Winter</a></li>
+                    </ul>
+                </div>
 
+            <div class="col-9">
+                    <form class="form-inline py-2 my-lg-0 " id="searchform">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search and Select Someone"
+                        spellcheck="false" id="tagsAthletes" aria-label="Search" />         
+                    </form>
+            <div id="error-message" class="ps-2 mb-2"></div>
+            </div>
+        </div>
         <div class="row" data-bind="foreach: records">
             <div class="col-12 col-md-4 col-sm-6 col-lg-3 col-xl-3 col-xxl-3 " style="margin-bottom: 20px;">
                 <div class="card  h-100" id="zoom"  >
@@ -101,7 +116,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <img src="../images/Olympic_rings.svg" height="30" /> Loading data...
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png" height="30" /> Loading data...
                     </h5>
                 </div>
                 <div class="modal-body text-center">

@@ -74,6 +74,28 @@ var vm = function () {
             }
         });
     };
+
+    self.activate2 = function (id, season='name') {
+        console.log('CALL: getGames...');
+        var composedUri = self.baseUri() + "?season=" + season + "&page=" + id + "&pageSize=" + self.pagesize();
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            //self.SetFavourites();
+            for (var i = 0; i <= self.records().length; i++){
+                self.updateheart((self.records()[i]).Id, 'games')
+            }
+        });
+    };
+
+
     $().ready(function () {
         $("#tagsAthletes").autocomplete({
             minLength: 3,
@@ -130,20 +152,37 @@ var vm = function () {
             }
     });
 
-    
+    self.init = function() {
+        for (let k in self.metaData) {
+            if (localStorage.getItem(k) != undefined) {
+                self.metaData[k] = JSON.parse(localStorage.getItem(k))
+            } else {
+                self.metaData[k] = []
+            }
+        }
+
+        
+
+        /* $('.page-number').click(function(e) {
+            $('.page-number').removeClass("active")
+            $(this).addClass("active")
+        }); */
+
+
+    }
     
     self.updateLocalStorage = (key, data) => {
         localStorage.setItem(key, JSON.stringify(data))
         console.log(data)
     }
 
-    self.checkButtons = function(id) {
-        for (let k in self.metaData) {
-            if (self.metaData[k].includes(String(id))) {
-                document.getElementById(k + '-button').classList.add("active")
-            }
-        }
-    }
+    // self.checkButtons = function(id) {
+    //     for (let k in self.metaData) {
+    //         if (self.metaData[k].includes(String(id))) {
+    //             document.getElementById(k + '-button').classList.add("active")
+    //         }
+    //     }
+    // }
 
     self.updateMetaData = function(id, name1) {
         //Adicionar
@@ -223,13 +262,23 @@ var vm = function () {
 
     //--- start ....
     showLoading();
+    self.init();
     var pg = getUrlParameter('page');
+    self.season = ko.observable(getUrlParameter('season'))
     console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    if (pg == undefined){
+        if (self.season()!=undefined){
+            self.activate2(1, self.season());
+        }
+        else  {self.activate(1);}
     }
+    else {
+        if (self.season()!=undefined){
+            self.activate2(pg, self.season())
+        }
+        else {self.activate(pg);}
+    }
+
     console.log("VM initialized!");
 };
 

@@ -4,7 +4,6 @@ var vm = function () {
     //---Variáveis locais
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/athletes');
-    //self.baseUri = ko.observable('http://localhost:62595/api/drivers');
     self.displayName = 'Olympic Games Athletes';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
@@ -38,12 +37,10 @@ var vm = function () {
             step = self.totalPages() - 9;
         else
             step = Math.max(self.currentPage() - 5, 0);
-
         for (var i = 1; i <= size; i++)
             list.push(i + step);
         return list;
-        
-    };
+     };
 
     
     self.metaData = {
@@ -70,6 +67,7 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+          
             
 
         });
@@ -85,6 +83,7 @@ var vm = function () {
         if(med == "4")
           return "";
     };
+    
     self.formatSex = function(sexo) {
         if(sexo == "M")
           return '<i style="font-size:17px" class="fa fa-mars" aria-hidden="true"></i>';
@@ -110,14 +109,10 @@ var vm = function () {
         if (self.metaData[name].includes(String(id)) == false) {
             self.metaData[name].push(String(id))
             self.updateLocalStorage(name, self.metaData[name])
-            $('#coracao').removeClass('fa fa-heart-o')
-            $('#coracao').addClass('fa fa-heart')
         } else {
             //Remover
             self.metaData[name].splice(self.metaData[name].indexOf(String(id)), 1)
             self.updateLocalStorage(name, self.metaData[name])
-            $('#coracao').removeClass('fa fa-heart')
-            $('#coracao').addClass('fa fa-heart-o')
         }
         self.updateheart(id, name)
     }

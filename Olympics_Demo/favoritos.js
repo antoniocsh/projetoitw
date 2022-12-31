@@ -134,6 +134,8 @@ var vm = function() {
     self.init()
 }
 
+
+
 $(document).ready(function() {
     console.log("ready!");
     ko.applyBindings(new vm());
