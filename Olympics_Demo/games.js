@@ -5,12 +5,12 @@ var vm = function () {
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/games');
     //self.baseUri = ko.observable('http://localhost:62595/api/drivers');
-    self.displayName = 'Olympic Games editions List';
+    self.displayName = ko.observable('')
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
     self.currentPage = ko.observable(1);
-    self.pagesize = ko.observable(20);
+    self.pagesize = ko.observable(21);
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
@@ -68,6 +68,7 @@ var vm = function () {
             self.pagesize(data.PageSize)
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
+            self.displayName('Olympic Games editions List');
             //self.SetFavourites();
             for (var i = 0; i <= self.records().length; i++){
                 self.updateheart((self.records()[i]).Id, 'games')
@@ -86,9 +87,17 @@ var vm = function () {
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
             self.pagesize(data.PageSize)
-            self.totalPages(data.TotalPages);
+            self.totalPages(2);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+            if (season == 1){
+                self.totalRecords(29);
+                self.displayName('Summer Olympic Games editions List');
+            }
+            else if (season == 2){
+                self.totalRecords(22);
+                self.displayName('Winter Olympic Games editions List');
+            }
             for (var i = 0; i <= self.records().length; i++){
                 self.updateheart((self.records()[i]).Id, 'games')
             }
@@ -263,21 +272,28 @@ var vm = function () {
     //--- start ....
     showLoading();
     self.init();
+    $("#tagsAthletes").val(undefined)
     var pg = getUrlParameter('page');
     self.season = ko.observable(getUrlParameter('season'))
     console.log(pg);
     if (pg == undefined){
         if (self.season()!=undefined){
             self.activate2(1, self.season());
+            $("#divshow").removeClass("d-none")
         }
         else  {self.activate(1);}
     }
     else {
         if (self.season()!=undefined){
             self.activate2(pg, self.season())
+            $("#divshow").removeClass("d-none")
         }
         else {self.activate(pg);}
     }
+    $("#remover").click(function(){
+        self.activate(1)
+        $("#divshow").addClass("d-none")
+    })
 
     console.log("VM initialized!");
 };
