@@ -74,7 +74,14 @@
         <div class="row" data-bind="foreach: records">
             <div class="col-12 col-md-4 col-sm-6 col-lg-3 col-xl-3 col-xxl-3 " style="margin-bottom: 20px;">
                 <div class="card h-100" id="zoom"  >
-                    <a  data-bind="attr: { href:'./competitionDetails.html?id=' + Id }" ><img style="cursor:pointer; padding: 4px;" class="card-img" data-bind="attr: {src: Photo}" width="250px"/></a>
+                    <a  data-bind="attr: { href:'./competitionDetails.html?id=' + Id }" >
+                        <!-- ko if: Photo -->
+                        <img style="cursor:pointer; padding: 4px;" class="card-img" data-bind="attr: {src: Photo}" width="250px"/>
+                    <!-- /ko -->
+                    <!-- ko ifnot: Photo -->
+                    <img style="cursor:pointer; padding: 4px;" class="card-img" src="logo tocha.jpg" width="250px"/>
+                    <!-- /ko -->
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title" data-bind="text: Name"></h5>
                         <div class="card-text"> <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
@@ -107,7 +114,7 @@
                     </h5>
                 </div>
                 <div class="modal-body text-center">
-                    <i class="fa fa-spin fa-3x fa-refresh"></i>
+                    <img src="https://media.tenor.com/L9Vs9r6PtOgAAAAM/minka-madebyminka.gif">
                 </div>
             </div>
         </div>

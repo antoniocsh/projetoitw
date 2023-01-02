@@ -22,7 +22,7 @@ var Name1 = [];
         });
 
         function createBarGraph(Counter, Name) {
-        let barChart = new Chart("atletas", {
+        let barChartz = new Chart("atletas", {
             type: "bar",
             data: {
                 labels: Name1,
