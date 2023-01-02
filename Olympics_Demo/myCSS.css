@@ -37,6 +37,15 @@ li.page-item a {
     font-size: 0.85rem;
 }
 
+#zoom {
+    padding: 20px;
+    background-color: transparent;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: transform .4s;
+    /* Animation */
+    margin: auto;
+    z-index: 1000;
+  }
 #zoom:hover {
     transform: scale(1.06);
   }
