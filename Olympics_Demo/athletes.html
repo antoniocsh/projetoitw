@@ -13,7 +13,7 @@
 
     <title>ITW 2022/23 - Olympic Athletes List</title>
 </head>
-<body>
+<body> 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png" height="24" /></a>
@@ -26,8 +26,8 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class=" fa fa-flag-o text-danger"></i> Countries</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a></li>
-                                        <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
-<li class="nav-item"><a class="nav-link" aria-current="page" href="estatisticas.html"><i class="fa fa-bar-chart text-info"></i> Estatísticas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="estatisticas.html"><i class="fa fa-bar-chart text-info"></i> Estatísticas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="favoritos.html"><i class="fa fa-heart-o text-danger"></i> Favoritos</a></li>
                 </ul>
             </div>
@@ -47,20 +47,61 @@
             <div class="col-8 my-0 pt-3">
                 <ul class="pagination float-end">
                     <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                    <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: './athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                    <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: './athletes.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                    <li class="page-item float-end">
+                    <!-- ko ifnot: sortby -->
+                    <a class="page-link" title="First Page" data-bind="attr: { href: './athletes.html?page=' + '1',  rel:'prev'}">⇤</a>
+                    <!-- /ko -->
+                    <!-- ko if: sortby -->
+                    <a ckass="page-link" title="First Page" data-bind="attr: { href: './athletes.html?sortby=' + sortby() + '&page=' + '1',  rel:'prev'}">⇤</a>
+                    <!-- /ko -->
+                    </li>
+
+
+                    <li class="page-item float-end">
+                    <!-- ko ifnot: sortby -->
+                    <a class="page-link" title="Previous Page" data-bind="attr: { href: './athletes.html?page=' + previousPage(),  rel:'prev'}">←</a>
+                    <!-- /ko -->
+                    <!-- ko if: sortby -->
+                    <a class="page-link" title="Previous Page" data-bind="attr: { href: './athletes.html?sortby=' + sortby() + '&page=' + previousPage(),  rel:'prev'}">←</a>
+                    <!-- /ko -->
+                    </li>
                     <!-- /ko -->
                     <!-- ko foreach: pageArray()-->
                     <!-- ko if:$data == $parent.currentPage() -->
-                    <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
+                    <li class="active page-item">
+                        <a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a>
+                    </li>
                     <!-- /ko -->
+
                     <!-- ko if:$data != $parent.currentPage() -->
-                    <li class="page-item"><a class="page-link" data-bind="attr: { href: './athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                    <li class="page-item">
+                    <!-- ko ifnot: $parent.sortby() -->
+                    <a class="page-link" data-bind="attr: { href: './athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                    <!-- /ko -->
+                    <!-- ko if: $parent.sortby() -->
+                    <a class="page-link" data-bind="attr: { href: './athletes.html?sortby=' + $parent.sortby() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                    <!-- /ko -->
+                    </li>   
                     <!-- /ko -->
                     <!-- /ko -->
+
                     <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: './athletes.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                    <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: './athletes.html?page=' + totalPages() }">⇥</a></li>
+                    <li class="page-item">
+                    <!-- ko ifnot: sortby -->
+                    <a class="page-link" title="Next Page" data-bind="attr: { href: './athletes.html?page=' + nextPage(), rel:'next' }">→</a> 
+                    <!-- /ko -->
+                    <!-- ko if: sortby -->
+                    <a class="page-link" title="Next Page" data-bind="attr: { href: './athletes.html?sortby=' + sortby() + '&page=' + nextPage(), rel:'next' }">→</a>
+                    <!-- /ko -->
+                    </li>
+                    <li class="page-item">
+                    <!-- ko ifnot: sortby -->
+                    <a class="page-link" title="Last Page" data-bind="attr: { href: './athletes.html?page=' + totalPages() }">⇥</a>
+                    <!-- /ko -->
+                    <!-- ko if: sortby -->
+                    <a class="page-link" title="Last Page" data-bind="attr: { href: './athletes.html?sortby=' + sortby() + '&page=' + totalPages() }">⇥</a>
+                    <!-- /ko -->
+                    </li>
                     <!-- /ko -->
                 </ul>
             </div>
