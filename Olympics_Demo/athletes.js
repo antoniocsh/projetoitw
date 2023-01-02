@@ -51,6 +51,26 @@ var vm = function () {
         modalities: [],
 }
 
+self.init = function() {
+    for (let k in self.metaData) {
+        if (localStorage.getItem(k) != undefined) {
+            self.metaData[k] = JSON.parse(localStorage.getItem(k))
+        } else {
+            self.metaData[k] = []
+        }
+    }
+
+    
+
+    /* $('.page-number').click(function(e) {
+        $('.page-number').removeClass("active")
+        $(this).addClass("active")
+    }); */
+
+
+}
+
+
 
     //--- Page Events
     self.activate = function (id) {
@@ -67,9 +87,29 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
-          
-            
+            for (var i = 0; i <= self.records().length; i++){
+                self.updateheart((self.records()[i]).Id, 'athletes')
+            }
+        });
+    };
 
+    self.activate2 = function (id, sortby='name') {
+        console.log('CALL: getGames...');
+        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize() + "&sortby=" + sortby;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            //self.SetFavourites();
+            for (var i = 0; i <= self.records().length; i++){
+                self.updateheart((self.records()[i]).Id, 'athletes')
+            }
         });
     };
 
@@ -236,13 +276,31 @@ var vm = function () {
 
     //--- start ....
     showLoading();
-    var pg = getUrlParameter('page');
-    console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    self.init()
+$("#tagsAthletes").val(undefined);
+   
+var pg = getUrlParameter('page');
+self.sortby = ko.observable(getUrlParameter('sortby'))
+console.log(pg);
+if (pg == undefined){
+    if (self.sortby()!=undefined){
+        self.activate2(1, self.sortby());
+        $("#divshow").removeClass("d-none")
     }
+    else  {self.activate(1);}
+}
+else {
+    if (self.sortby()!=undefined){
+        self.activate2(pg, self.sortby())
+        $("#divshow").removeClass("d-none")
+    }
+    else {self.activate(pg);}
+}
+$("#remover").click(function(){
+    $("#divshow").addClass("d-none")
+})
+
+
     console.log("VM initialized!");
 };
 

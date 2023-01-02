@@ -132,6 +132,7 @@ var vm = function() {
         console.log(self.metaData.athletes)
     }
     self.init()
+$("#tagsAthletes").val(undefined)
 }
 
 

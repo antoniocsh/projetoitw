@@ -38,6 +38,7 @@
             }
         },
     }).find("li").css({ width: "150px" });
+    $("#tagsIndex").val(undefined);
 });
 
     

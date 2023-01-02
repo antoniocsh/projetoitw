@@ -271,8 +271,8 @@ var vm = function () {
 
     //--- start ....
     showLoading();
-    self.init();
-    $("#tagsAthletes").val(undefined)
+    self.init()
+    $("#tagsAthletes").val(undefined);
     var pg = getUrlParameter('page');
     self.season = ko.observable(getUrlParameter('season'))
     console.log(pg);
@@ -291,7 +291,6 @@ var vm = function () {
         else {self.activate(pg);}
     }
     $("#remover").click(function(){
-        self.activate(1)
         $("#divshow").addClass("d-none")
     })
 

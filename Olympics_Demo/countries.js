@@ -50,6 +50,24 @@ var vm = function () {
         games: [],
         modalities: [],
 }
+self.init = function() {
+    for (let k in self.metaData) {
+        if (localStorage.getItem(k) != undefined) {
+            self.metaData[k] = JSON.parse(localStorage.getItem(k))
+        } else {
+            self.metaData[k] = []
+        }
+    }
+
+    
+
+    /* $('.page-number').click(function(e) {
+        $('.page-number').removeClass("active")
+        $(this).addClass("active")
+    }); */
+
+
+}
 
     //--- Page Events
     self.activate = function (id) {
@@ -68,6 +86,9 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+            for (var i = 0; i <= self.records().length; i++){
+                self.updateheart((self.records()[i]).Id, 'countries')
+            }
         });
     };
     $().ready(function () {
@@ -219,6 +240,8 @@ var vm = function () {
 
     //--- start ....
     showLoading();
+    self.init()
+$("#tagsAthletes").val(undefined);
     var pg = getUrlParameter('page');
     console.log(pg);
     if (pg == undefined)
