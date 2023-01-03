@@ -10,6 +10,7 @@
         <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="myCSS.css" />
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/38/38153.png">
     
         <title>ITW 2022/23 - Favourites</title>
     </head>
@@ -27,8 +28,10 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class=" fa fa-flag-o text-danger"></i> Countries</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a></li>
-<li class="nav-item"><a class="nav-link" aria-current="page" href="estatisticas.html"><i class="fa fa-bar-chart text-info"></i> Estatísticas</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="favoritos.html"><i class="fa fa-heart-o text-danger"></i> Favoritos</a></li>
+<li class="nav-item"><a class="nav-link" aria-current="page" href="estatisticas.html"><i class="fa fa-bar-chart text-info"></i> Statistics</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="favoritos.html"><i class="fa fa-heart-o text-danger"></i> Favorites</a></li>
+                    <li style="cursor:pointer" class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#modalId" aria-current="page"><i class="fa fa-newspaper-o text-dark"></i> Newsletter</a></li>
+
                 </ul>
             </div>
         </div>
@@ -229,7 +232,55 @@
     </div>
 
         
-    <!-- Modal -->
+    
+<!-- Modal da newsletter-->
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                        <h3 class="w-100 modal-title text-center" id="modalTitleId">Subscribe to our Newsletter</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form>
+                    <div class="mb-3">
+                    <label for="emails" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="" id="emails" aria-describedby="emailHelpId" placeholder="abc@ua.pt" required>
+                    <div id="emailHelpId" class="form-text">We'll never share your email with anyone else.</div>
+                    <div class="mb-3">
+                    <label for="nomes" class="form-label pt-3">Name</label>
+                    <input type="text"
+                        class="form-control" name="nomes" id="" aria-describedby="helpId" placeholder="O seu nome" required>
+                    </div>
+
+
+
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modalId = document.getElementById('modalId');
+
+    modalId.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          let button = event.relatedTarget;
+          // Extract info from data-bs-* attributes
+          let recipient = button.getAttribute('data-bs-whatever');
+
+        // Use above variables to manipulate the DOM
+    });
+</script>
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

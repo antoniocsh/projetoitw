@@ -16,6 +16,11 @@ var vm = function () {
     self.Participant = ko.observableArray([]);
     self.Organizer = ko.observableArray([]);
     self.Url = ko.observable('');
+    self.GameId = ko.observable('');
+    self.GameName = ko.observable('');
+    self.Medals = ko.observableArray([]);
+
+
 
     //--- Page Events
     self.activate = function (id) {
@@ -46,8 +51,38 @@ var vm = function () {
                 $("#AccordianOrganizer").hide();
                 $("#Org").hide();
             }
-        });
-    };
+        //     let kakaka = 'http://192.168.160.58/Olympics/api/Statistics/Medals_Games?id=' + self.Id()
+        //     ajaxHelper(kakaka, 'GET').done(function (data) {
+        //         self.GameId(data.GameId);
+        //         self.GameName(data.GameName);
+        //         self.Medals(data.Medals);
+        //         var lista = [];
+        //         for (var i = 0; i < Object.keys(data.kakaka).length; i++) 
+        //         {lista.append(data.Medals[i].Medals[2].Counter) }
+        //         console.log(lista)
+        //         var nome = [];
+        //         for (var i = 0; i < data.Medals.length; i++)
+        //         { nome.append(data.Medals[i].GameName) }
+        //         console.log(nome)
+        //         var ctx = document.getElementById("bronze");
+        //         var myChart = new Chart(ctx, {
+        //         type: 'bar',
+        //         data: {
+        //         labels: nome,
+        //         datasets: [{
+        //             data: lista,
+        //             label: 'Medalhas de Bronze por Edição dos Jogos Olímpicos',
+        //             backgroundColor: ['rgba(250, 138, 52, 0.4)','rgba(52, 230, 250, 0.4)',],
+        //             borderColor: ['rgba(250, 131, 40, 0.6)','rgba(54, 162, 235, 0.6)',],
+        //             borderWidth: 1
+        //         }]
+        //     }
+        //     }); 
+        //  });
+    });
+};
+
+
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

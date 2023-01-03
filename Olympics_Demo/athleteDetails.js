@@ -46,8 +46,15 @@ var vm = function () {
             if (data.BornDate == null) {
                 $("#BornDate").hide();
             }
+            if (data.BornDate != null) { 
+                $("#bornoi").text( new Date(data.BornDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })) 
+            }
+            
             if (data.DiedDate == null) {
                 $("#DiedDate").hide();
+            }
+            if (data.DiedDate != null) { 
+                $("#diedoi").text( new Date(data.DiedDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })) 
             }
             if (data.BornPlace == null) {
                 $("#BornPlace").hide();

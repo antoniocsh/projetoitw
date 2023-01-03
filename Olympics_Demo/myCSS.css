@@ -44,7 +44,7 @@ li.page-item a {
     transition: transform .4s;
     /* Animation */
     margin: auto;
-    z-index: 1000;
+    z-index: 5;
   }
 #zoom:hover {
     transform: scale(1.06);

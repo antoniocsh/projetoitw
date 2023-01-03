@@ -3,19 +3,26 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Games/');
+    self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Games/FullDetails?id=');
     self.displayName = 'Olympic Games edition Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
     self.Id = ko.observable('');
     self.CountryName = ko.observable('');
+    self.City = ko.observable('');
     self.Logo = ko.observable('');
     self.Name = ko.observable('');
     self.Photo = ko.observable('');
     self.Season = ko.observable('');
     self.Year = ko.observableArray('');
     self.Url = ko.observable('');
+    self.Lat = ko.observable('');
+    self.Lon = ko.observable('');
+    self.Athletes = ko.observableArray([]);
+    self.Modalities = ko.observableArray([]);
+    self.Competitions = ko.observableArray([]);
+    self.Medals = ko.observableArray([]);
 
     //--- Page Events
     self.activate = function (id) {
@@ -31,8 +38,31 @@ var vm = function () {
             self.Photo(data.Photo);
             self.Season(data.Season);
             self.Year(data.Year);
+            self.City(data.City);
+            self.Lat(data.Lat);
+            self.Lon(data.Lon);
+            self.Athletes(data.Athletes);
+            self.Modalities(data.Modalities);
+            self.Competitions(data.Competitions);
+            self.Medals(data.Medals);  
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+            labels: [data.Medals[0].MedalName, data.Medals[1].MedalName, data.Medals[2].MedalName],
+            datasets: [{
+            backgroundColor: [
+                "#ffdf00",
+                "#95a5a6",
+                "#b08d57",
+            ],
+            data: [data.Medals[0].Counter, data.Medals[1].Counter, data.Medals[2].Counter]
+            }]
+        }
+        });
         });
     };
+    
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
@@ -51,6 +81,35 @@ var vm = function () {
         });
     }
 
+  
+
+    self.formatPosition = function(med) {
+        if(med == "1")
+          return '<span style="font-size: 17px"> &#129351; </span>';
+        if(med == "2")
+          return '<span style="font-size: 17px"> &#129352; </span>';
+        if(med == "3")
+          return '<span style="font-size: 17px"> &#129353; </span>';
+        if(med == "4")
+          return "";
+    };
+    self.formatMedal = function(med) {
+        if(med == "1")
+          return '<span style="font-size: 17px"> &#129351; </span>';
+        if(med == "2")
+          return '<span style="font-size: 17px"> &#129352; </span>';
+        if(med == "3")
+          return '<span style="font-size: 17px"> &#129353; </span>';
+        if(med == "4")
+          return "";
+    };
+    
+    self.formatSex = function(sexo) {
+        if(sexo == "M")
+          return '<i style="font-size:17px" class="fa fa-mars" aria-hidden="true"></i>';
+        if(sexo == "F")
+          return '<i style="font-size:17px" class="fa fa-venus" aria-hidden="true"></i>';
+    };
     function showLoading() {
         $('#myModal').modal('show', {
             backdrop: 'static',

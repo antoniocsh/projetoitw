@@ -94,7 +94,7 @@ self.init = function() {
     };
     $().ready(function () {
         $("#tagsAthletes").autocomplete({
-            minlenght: 3,
+            minLength: 3,
             source: function (request, response) {
                 $.ajax({
                     url: "http://192.168.160.58/Olympics/api/Competitions/SearchByName?q=" + request.term,
