@@ -53,19 +53,16 @@
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form>
+                    <form name="Newsletter"  action="http://192.168.160.36/FormEcho.aspx" method="post">
                     <div class="mb-3">
                     <label for="emails" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="" id="emails" aria-describedby="emailHelpId" placeholder="abc@ua.pt" required>
+                    <input type="email" class="form-control" name="Email" id="emails" aria-describedby="emailHelpId" placeholder="abc@ua.pt" required>
                     <div id="emailHelpId" class="form-text">We'll never share your email with anyone else.</div>
                     <div class="mb-3">
                     <label for="nomes" class="form-label pt-3">Name</label>
                     <input type="text"
-                        class="form-control" name="nomes" id="" aria-describedby="helpId" placeholder="O seu nome" required>
+                        class="form-control" name="Nome" id="nomes" aria-describedby="helpId" placeholder="O seu nome" required>
                     </div>
-
-
-
                     </div>
                 </div>
             
@@ -90,44 +87,6 @@
         // Use above variables to manipulate the DOM
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="container">
         <div class="row">
@@ -299,19 +258,20 @@
         </div>
     </div>
 
-    <div class=" aligns-items-center ps-4 pt-4">
+    <div class=" aligns-items-center ps-4 pt-4 border-bottom">
         <div class="row ">Medals</div>
-        <div style="width: 400px; margin:auto" class="row aligns-items-center" > 
+        <div style="width: 400px; margin:auto" class="row aligns-items-center pb-2" > 
             <canvas id="myChart"></canvas>
           </div>
     </div>
 
-    <!-- <div style="width: 400px; margin:auto" class="row border-bottom aligns-items-center" > 
-        <canvas id="graficosos"></canvas>
-      </div> -->
-
-<!-- /ko -->
-    
+ <!-- /ko --> 
+ <div class=" aligns-items-center ps-4 pt-4 border-bottom">
+    <div class="row ">Medals per Country</div>
+        <div style="margin-right:15px; position: relative; padding:40px; height:150vh; width:65vw">
+        <canvas class="mt-4" style="height:1000px; width:900px" id="graficosos"></canvas></div>
+    </div>
+  
 
 
         <!-- <div class="row border-bottom mx-0  my-1" data-bind="visible: Logo() != '' && Logo() != null">
@@ -326,11 +286,11 @@
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
             </div>
         </div> -->
-        <!-- /ko -->
+       
 
 
-
-        <a href="./games.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+<div class="pt-2">
+        <a href="./games.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a></div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -361,81 +321,15 @@
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <script src="gameDetails.js"></script>
     
   
     <script>
-
-        var Counter = [];
-        var CountryName = [];
-        
-        function getUrlParameter(sParam) {
-                var sPageURL = window.location.search.substring(1),
-                    sURLVariables = sPageURL.split('&'),
-                    sParameterName,
-                    i;
-        
-                for (i = 0; i < sURLVariables.length; i++) {
-                    sParameterName = sURLVariables[i].split('=');
-        
-                    if (sParameterName[0] === sParam) {
-                        return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                    }
-                }
-            };
-        
-        var pg = getUrlParameter('id');
-        $.ajax({
-        type: 'GET',
-        url: 'http://192.168.160.58/Olympics/api/statistics/Medals_Country?id=' + pg,
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        success: function (data, status, xhr) {
-        
-        var medData = data;
-        
-        medData.forEach(element => {
-        Counter.push(element.Medals.reduce((accum, ele) => ele.Counter + accum, 0))
-        CountryName.push(element.CountryName);
-        });
-        
-        createBarGraph(Counter, CountryName);
-        
-        }
-        });
-        
-        function createBarGraph(Counter, CountryName) {
-        let barChart = new Chart("graficosos", {
-        type: "bar",
-        data: {
-        labels: CountryName,
-        datasets: [{
-        data: Counter,
-        label: 'Number of Medals per country in this Olympic Games edition',
-        backgroundColor: ["rgba(54, 162, 235, 0.5)", "rgba(54, 162, 235, 1)"],
-        borderColor: ['rgb(54, 162, 235)','rgb(54, 162, 235)',],
-        borderWidth: 1  
-        }]
-        },
-        options:{
-            animations: {
-              tension: {
-                duration: 1000,
-                easing: 'linear',
-                from: 1,
-                to: 0,
-                loop: true
-              }
-            },
-            indexAxis: 'y',
-        }
-        });
-        }
-        
-            </script>
+console.log("amog us")
+    </script>
   
 </body>
 </html>

@@ -137,6 +137,9 @@ var vm = function () {
         }
     };
 
+    
+
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('id');
@@ -146,6 +149,59 @@ var vm = function () {
     else {
         self.activate(pg);
     }
+    
+var Counter = [];
+var CountryName = [];
+$.ajax({
+type: 'GET',
+url: 'http://192.168.160.58/Olympics/api/statistics/Medals_Country?id=' + pg,
+headers: {
+'Content-Type': 'application/json'
+},
+success: function (data, status, xhr) {
+
+var medData = data;
+
+medData.forEach(element => {
+Counter.push(element.Medals.reduce((accum, ele) => ele.Counter + accum, 0))
+CountryName.push(element.CountryName);
+});
+
+createBarGraph(Counter, CountryName);
+
+}
+});
+
+function createBarGraph(Counter, CountryName) {
+let barChart = new Chart("graficosos", {
+type: "bar",
+data: {
+labels: CountryName,
+datasets: [{
+data: Counter,
+label: 'Number of Medals per country in this Olympic Games edition',
+backgroundColor: ["rgba(255, 56, 56, 0.5)", "rgba(59, 255, 131, 0.8)"],
+borderColor: ['rgba(255, 0, 0, 0.8)','rgba(15, 212, 87, 1)',],
+borderWidth: 1  
+}]
+},
+options:{ 
+    indexAxis: 'y',
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+   
+}
+});
+}
+
+
     console.log("VM initialized!");
 };
 
